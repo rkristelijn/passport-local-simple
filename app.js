@@ -45,7 +45,7 @@ passport.use(new LocalStrategy({
                     return done(null, user);
                 } else {
                     console.log('good username and bad password');
-                    return done(null, null);
+                    return done(null, false, {message: 'Incorrect password.'});
                 }
             }
 

@@ -37,7 +37,7 @@ var users = [
 
 Some examples you see this calling Mongo User.find, or something similar, essentially
 this is just a way to invoke a callback, and search for users. You can also use this to
-compare passwords if you want, but I'm doing that
+compare passwords if you want, but I'm not doing that here.
 
 ```javascript
 function findByUsername(username, callback) {
@@ -52,9 +52,9 @@ function findByUsername(username, callback) {
 }
 ```
 
-## set-up LocalStrategy
+## Set-up LocalStrategy
 
-this tells passport to "use" a LocalStrategy and to map the username,password fields.
+This tells passport to "use" a LocalStrategy and to map the username,password fields.
 
 ```javascript
 passport.use(new LocalStrategy({
@@ -64,9 +64,10 @@ passport.use(new LocalStrategy({
 },
 ```
 
-## calls search function
+## Call the search function
 
-this calls our db search function and invokes the callback 'done' with the arguments it's expecting
+This calls our db search function and invokes the callback 'done' with the arguments it's expecting. I'm also
+performing my password comparison here.
 
 ```javascript
 findByUsername(username, function (err, user) {
@@ -82,14 +83,14 @@ findByUsername(username, function (err, user) {
             return done(null, user);
         } else {
             console.log('good username and bad password');
-            return done(null, null);
+            return done(null, false, {message: 'Incorrect password.'});
         }
     }
 
 });
 ```
 
-## configures express
+## Configure Eexpress
 
 This tells the app to use the public folder and to parse the body for form elements.
 
@@ -100,7 +101,7 @@ app.use('/', express.static('public')); // set to display index.html could also 
 app.use(bodyParser.urlencoded({extended: false})); // use for forms
 ```
 
-## create the custom callback
+## Create the custom callback
 
 This is the custom callback for LocalStrategy that takes the arguments: error, user, and info.
 
@@ -118,7 +119,7 @@ app.post('/login', function (req, res, next) {
 });
 ```
 
-## start the app
+## Start the app
 
 Finally, tell the app to listen to a port.
 
