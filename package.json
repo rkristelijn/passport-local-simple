@@ -9,6 +9,7 @@
   "dependencies": {
     "body-parser": "^1.14.1",
     "passport": "^0.3.2",
-    "passport-local": "^1.0.0"
+    "passport-local": "^1.0.0",
+    "restify": "^4.0.3"
   }
 }

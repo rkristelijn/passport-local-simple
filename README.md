@@ -1,7 +1,7 @@
 # passport-local-simple
 A simple implementation of a LocalStrategy for passport.
 
-## To Run This Example
+## Express Example
 
 ```bash
 
@@ -10,16 +10,32 @@ npm start
 
 ```
 
+## Restify Example
+
+```bash
+
+npm install
+node restify.js
+
+install 'curl'
+run restify-test.sh
+-or-
+curl -H "Content-Type: application/json" -X POST -d '{"username":"scott","password":"password"}' http://localhost:3000/login
+```
+
+
 ## Explaination Of Code (Don't cut-paste this, use app.js)
 
 Preliminary Stuff. Require your packages etc.
 
 ```javascript
 var express = require('express');
+//var restify = require('restify'); //(for restify)
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy; // a 'strategy' to use for passport
 var bodyParser = require('body-parser'); // be able to parse form elements
 var app = express();
+//var app = restify.createServer();
 ```
 
 ## Our database
@@ -97,7 +113,7 @@ This tells the app to use the public folder and to parse the body for form eleme
 ```javascript
 // configure app
 app.use('/', express.static('public')); // set to display index.html could also use sendFile
-//app.use(bodyParser.json()); // use for JSON
+//app.use(bodyParser.json()); // use for JSON w/restify
 app.use(bodyParser.urlencoded({extended: false})); // use for forms
 ```
 
