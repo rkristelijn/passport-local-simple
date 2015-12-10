@@ -1,0 +1,14 @@
+{
+  "author": "Scott Preston",
+  "name": "passport-local-simple",
+  "description": "A simple implementation of a LocalStrategy for passport.",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "version": "0.0.1",
+  "dependencies": {
+    "body-parser": "^1.14.1",
+    "passport": "^0.3.2",
+    "passport-local": "^1.0.0"
+  }
+}
