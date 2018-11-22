@@ -5,10 +5,21 @@ A simple implementation of a LocalStrategy for passport.
 
 ```bash
 
-npm install
-npm start
+npm i
+npm start -s
 
 ```
+
+## Run tests
+
+```bash
+npm test -s
+```
+
+or
+
+```bash
+npm run test:watch 
 
 ## Restify Example
 
@@ -147,16 +158,18 @@ app.listen(3000);
 - [x] `npm i --save express` -> added in `package.json`
 - [x] split app and server to be able to set up tests
 - [x] added mocha tests before optimizing code
+- [x] test route with login
+- [x] optimize code
+    - [x] remove console, of move behind ` if (debug)`
+    - [x] var -> const / let
+- [x] npm outdated: passport from 0.3.2 to 0.4.0
 
 ToDo
 
 - [ ] logout
-- [ ] test route with login
-- [ ] npm outdated
+- [ ] create SPA to make calls
+- [ ] create secure route
 - [ ] look at error python
-- [ ] optimize code
-    - [ ] remove console, of move behind ` if (debug)`
-    - [ ] var -> const / let
     - [ ] single file version
     - [ ] multi file version
     - [ ] check out restify
