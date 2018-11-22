@@ -175,3 +175,6 @@ ToDo
   ## Next steps
 
   For what I can read on [passport at npmjs.com](https://www.npmjs.com/package/passport) the current state of the project doesn't cope with follow-up requests, because there is no session and the session isn't persistant throughout the calls. For that we need `serialize` middleware. On top of that we may need cookie support and/or session support. Only if this is created we can use the logout feature. This will be created on a [branch](https://github.com/rkristelijn/passport-local-simple/tree/feature/persistent)
+
+  - @see [local-strategy github](https://github.com/mjhea0/passport-local-express4)
+  - @see [blog about above](https://mherman.org/blog/local-authentication-with-passport-and-express-4/)
