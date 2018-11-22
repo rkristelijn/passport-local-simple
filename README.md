@@ -106,7 +106,7 @@ findByUsername(username, function (err, user) {
 });
 ```
 
-## Configure Eexpress
+## Configure Express
 
 This tells the app to use the public folder and to parse the body for form elements.
 
@@ -143,4 +143,20 @@ Finally, tell the app to listen to a port.
 app.listen(3000);
 ```
 
-Thanks!!
+## Updates
+- [x] `npm i --save express` -> added in `package.json`
+- [x] split app and server to be able to set up tests
+- [x] added mocha tests before optimizing code
+
+ToDo
+
+- [ ] logout
+- [ ] test route with login
+- [ ] npm outdated
+- [ ] look at error python
+- [ ] optimize code
+    - [ ] remove console, of move behind ` if (debug)`
+    - [ ] var -> const / let
+    - [ ] single file version
+    - [ ] multi file version
+    - [ ] check out restify

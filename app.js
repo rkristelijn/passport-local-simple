@@ -8,8 +8,8 @@ var app = express();
 // this can be used via mongo, mysql or any other thing, but no dependencies here!
 
 var users = [
-    {id: 1, username: 'bob', password: 'secret', email: 'bob@example.com'}
-    , {id: 2, username: 'scott', password: 'password', email: 'scott@example.com'}
+    { id: 1, username: 'bob', password: 'secret', email: 'bob@example.com' }
+    , { id: 2, username: 'scott', password: 'password', email: 'scott@example.com' }
 ];
 
 // this is our search function
@@ -26,10 +26,10 @@ function findByUsername(username, callback) {
 
 // define what passport uses
 passport.use(new LocalStrategy({
-        // this maps the file names in the html file to the passport stuff
-        usernameField: 'username',
-        passwordField: 'password'
-    },
+    // this maps the file names in the html file to the passport stuff
+    usernameField: 'username',
+    passwordField: 'password'
+},
     function (username, password, done) {
         // replace this with our search function, mysql/monogo/service/etc
         findByUsername(username, function (err, user) {
@@ -38,14 +38,14 @@ passport.use(new LocalStrategy({
             }
             if (!user) {
                 console.log('bad username');
-                return done(null, false, {message: 'Incorrect username.'});
+                return done(null, false, { message: 'Incorrect username.' });
             } else {
                 if (user.password === password) {
                     console.log('good username and password');
                     return done(null, user);
                 } else {
                     console.log('good username and bad password');
-                    return done(null, false, {message: 'Incorrect password.'});
+                    return done(null, false, { message: 'Incorrect password.' });
                 }
             }
 
@@ -55,19 +55,19 @@ passport.use(new LocalStrategy({
 
 // configure app
 app.use('/', express.static('public')); // set to display index.html could also use sendFile
-//app.use(bodyParser.json()); // use for JSON
-app.use(bodyParser.urlencoded({extended: false})); // use for forms
+app.use(bodyParser.json()); // use for JSON
+app.use(bodyParser.urlencoded({ extended: false })); // use for forms
 
 // custom callback
 app.post('/login', function (req, res, next) {
     passport.authenticate('local', function (err, user, info) {
         console.log(err, user, info);
         if (user) {
-            res.send({user: user});
+            res.send({ user: user });
         } else {
-            res.send({error: err, info: info});
+            res.send({ error: err, info: info });
         }
     })(req, res, next);
 });
 
-app.listen(3000);
+module.exports = app;
