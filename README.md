@@ -154,7 +154,7 @@ Finally, tell the app to listen to a port.
 app.listen(3000);
 ```
 
-## Updates
+## Updates 22-11-2018 by [rkristelijn](https://github.com/rkristelijn)
 - [x] `npm i --save express` -> added in `package.json`
 - [x] split app and server to be able to set up tests
 - [x] added mocha tests before optimizing code
@@ -169,7 +169,9 @@ ToDo
 - [ ] logout
 - [ ] create SPA to make calls
 - [ ] create secure route
-- [ ] look at error python
-    - [ ] single file version
-    - [ ] multi file version
-    - [ ] check out restify
+- [ ] single file version
+- [ ] multi file version
+
+  ## Next steps
+
+  For what I can read on [passport at npmjs.com](https://www.npmjs.com/package/passport) the current state of the project doesn't cope with follow-up requests, because there is no session and the session isn't persistant throughout the calls. For that we need `serialize` middleware. On top of that we may need cookie support and/or session support. Only if this is created we can use the logout feature. This will be created on a [branch]()
