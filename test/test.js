@@ -7,45 +7,46 @@ const endpoint = `http://localhost:${port}`;
 let user = { 'username': 'bob', 'password': 'wrongpw' };
 let server;
 
-describe('passport-local tests', function () {
-    before(function (done) {
-        server = app.listen(port, function () {
+describe('passport-local tests', () => {
+    before((done) => {
+        server = app.listen(port, () => {
             done();
         });
     });
-    after(function (done) {
+    after((done) => {
         server.close();
         done();
     });
-    describe('public routes', function () {
-        it('GET / should return 200', function (done) {
-            request.get(endpoint, function (err, res, body) {
+    describe('public routes', () => {
+        it('GET / should return 200', (done) => {
+            request.get(endpoint, (err, res, body) =>  {
                 assert.equal(res.statusCode, 200, 'should return a normal page');
                 done();
             });
         });
     });
-    describe('authentication', function () {
-        it('POST /login should return Missing credentials', function (done) {
-            request({ url: `${endpoint}/login`, method: 'POST', json: { username: 'bob' } }, function (err, res, body) {
+    describe('authentication', () => {
+        it('POST /login should return Missing credentials', (done) => {
+            request({ url: `${endpoint}/login`, method: 'POST', json: { username: 'bob' } }, (err, res, body) =>  {
                 assert.equal(body.info.message, 'Missing credentials', 'should return JSON with body.info.message to Missing credentials');
                 done();
             });
         });
-        it('POST /login should return Incorrect password', function (done) {
-            request({ url: `${endpoint}/login`, method: 'POST', json: user }, function (err, res, body) {
+        it('POST /login should return Incorrect password', (done) => {
+            request({ url: `${endpoint}/login`, method: 'POST', json: user }, (err, res, body) =>  {
                 assert.equal(body.info.message, 'Incorrect password.');
                 done();
             });
         });
-        it('POST /login should return user', function (done) {
+        it('POST /login should return user', (done) => {
             user.password = 'secret';
-            request({ url: `${endpoint}/login`, method: 'POST', json: user }, function (err, res, body) {
+            request({ url: `${endpoint}/login`, method: 'POST', json: user }, (err, res, body) =>  {
                 assert.equal(body.user.username, 'bob');
                 done();
             });
         });
-        it('hello', function (done) {
+        it('hello', (done) => {
+            assert.equal(true, false,'should fail');
             done();
         });
     });
