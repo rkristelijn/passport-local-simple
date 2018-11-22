@@ -1,13 +1,14 @@
-var express = require('express');
-var passport = require('passport');
-var LocalStrategy = require('passport-local').Strategy; // a 'strategy' to use for passport
-var bodyParser = require('body-parser'); // be able to parse form elements
-var app = express();
+const express = require('express');
+const passport = require('passport');
+const LocalStrategy = require('passport-local').Strategy; // a 'strategy' to use for passport
+const bodyParser = require('body-parser'); // be able to parse form elements
+const debug = false;
+let app = express();
 
 // this is our users database
 // this can be used via mongo, mysql or any other thing, but no dependencies here!
 
-var users = [
+let users = [
     { id: 1, username: 'bob', password: 'secret', email: 'bob@example.com' }
     , { id: 2, username: 'scott', password: 'password', email: 'scott@example.com' }
 ];
@@ -37,14 +38,14 @@ passport.use(new LocalStrategy({
                 return done(err);
             }
             if (!user) {
-                console.log('bad username');
+                if(debug) console.log('bad username');
                 return done(null, false, { message: 'Incorrect username.' });
             } else {
                 if (user.password === password) {
-                    console.log('good username and password');
+                    if(debug) console.log('good username and password');
                     return done(null, user);
                 } else {
-                    console.log('good username and bad password');
+                    if(debug) console.log('good username and bad password');
                     return done(null, false, { message: 'Incorrect password.' });
                 }
             }
@@ -61,7 +62,7 @@ app.use(bodyParser.urlencoded({ extended: false })); // use for forms
 // custom callback
 app.post('/login', function (req, res, next) {
     passport.authenticate('local', function (err, user, info) {
-        console.log(err, user, info);
+        if(debug) console.log(err, user, info);
         if (user) {
             res.send({ user: user });
         } else {
