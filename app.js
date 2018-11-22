@@ -14,7 +14,7 @@ let users = [
 ];
 
 // this is our search function
-function findByUsername(username, callback) {
+let findByUsername = (username, callback) => {
     for (var i = 0, len = users.length; i < len; i++) {
         var user = users[i];
         if (user.username === username) {
@@ -31,9 +31,9 @@ passport.use(new LocalStrategy({
     usernameField: 'username',
     passwordField: 'password'
 },
-    function (username, password, done) {
+    (username, password, done) => {
         // replace this with our search function, mysql/monogo/service/etc
-        findByUsername(username, function (err, user) {
+        findByUsername(username, (err, user) =>  {
             if (err) {
                 return done(err);
             }
@@ -60,8 +60,8 @@ app.use(bodyParser.json()); // use for JSON
 app.use(bodyParser.urlencoded({ extended: false })); // use for forms
 
 // custom callback
-app.post('/login', function (req, res, next) {
-    passport.authenticate('local', function (err, user, info) {
+app.post('/login', (req, res, next) => {
+    passport.authenticate('local', (err, user, info) => {
         if(debug) console.log(err, user, info);
         if (user) {
             res.send({ user: user });
