@@ -22,10 +22,8 @@ passport.use(new LocalStrategy({ usernameField: 'username', passwordField: 'pass
     findByUsername(username, (err, user) => {
       if (err) return done(err);
       if (!user) return done(null, false, { message: 'Incorrect username.' });
-      else {
-        if (user.password === password) return done(null, user);
-        return done(null, false, { message: 'Incorrect password.' });
-      }
+      if (user.password && user.password !== password) return done(null, false, { message: 'Incorrect password.' });
+      return done(null, user);
     });
   }
 ));

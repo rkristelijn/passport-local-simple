@@ -45,9 +45,5 @@ describe('passport-local tests', () => {
                 done();
             });
         });
-        it('hello', (done) => {
-            assert.equal(true, false,'should fail');
-            done();
-        });
     });
 });
